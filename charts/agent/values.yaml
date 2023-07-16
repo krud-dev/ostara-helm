@@ -81,6 +81,11 @@ tolerations: []
 
 affinity: {}
 
-env:
-  - name: SPRING_PROFILES_ACTIVE
-    value: "kubernetes"
+config:
+  server:
+    forward-headers-strategy: framework
+  ostara:
+    agent:
+      service-discovery:
+        kubernetes:
+          enabled: true

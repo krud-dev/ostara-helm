@@ -14,7 +14,10 @@ spec:
   template:
     metadata:
       annotations:
-        rollme: {{ randAlphaNum 5 | quote }}
+        checksum/env: {{ .Values.config | toString | sha256sum }}
+        {{- if .Values.config }}
+        checksum/config: {{ include (print $.Template.BasePath "/configsecret.yaml") . | sha256sum }}
+        {{- end }}
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -34,8 +37,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.env }}
           env:
+            - name: SPRING_APPLICATION_JSON
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "agent.configSecretName" . }}
+                  key: SPRING_APPLICATION_JSON
+                  optional: true
+          {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:
@@ -50,6 +59,12 @@ spec:
             httpGet:
               path: /api/v1
               port: http
+          startupProbe:
+            httpGet:
+              path: /api/v1
+              port: http
+            failureThreshold: 60
+            periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
