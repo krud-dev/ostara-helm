@@ -38,6 +38,11 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: OSTARA_AGENT_MAIN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "agent.apiKeySecretName" . }}
+                  key: OSTARA_AGENT_MAIN_API_KEY
             - name: SPRING_APPLICATION_JSON
               valueFrom:
                 secretKeyRef:

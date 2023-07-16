@@ -20,3 +20,10 @@
   echo "Visit http://127.0.0.1:14444 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 14444:$CONTAINER_PORT
 {{- end }}
+
+2. In the Ostara app, create a new agent with the above URL
+
+
+If SSL is enabled, use the following command to get the API key:
+
+  API_KEY=$(kubectl get secret {{ include "agent.apiKeySecretName" . }} --namespace {{ .Release.Namespace }} -o jsonpath="{.data.OSTARA_AGENT_MAIN_API_KEY}" | base64 -d)

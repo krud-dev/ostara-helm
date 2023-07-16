@@ -64,3 +64,7 @@ Create the name of the service account to use
 {{- define "agent.configSecretName" -}}
     {{ include "agent.fullname" . }}-config
 {{- end }}
+
+{{- define "agent.apiKeySecretName" -}}
+    {{ include "agent.fullname" . }}-api-key
+{{- end }}
