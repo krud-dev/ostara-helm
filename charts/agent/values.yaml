@@ -2,18 +2,31 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+## @section Common parameters
+## @param replicaCount Number of agent replicas to deploy
 replicaCount: 1
 
+## @param image.repository Agent image repository
+## @param image.pullPolicy Agent image pull policy
+## @param image.tag Agent image tag override
 image:
   repository: idane/ostara-agent
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+## @param imagePullSecrets Specify docker-registry secret names as an array
 imagePullSecrets: []
+
+## @param nameOverride String to partially override agent.fullname
 nameOverride: ""
+
+## @param fullnameOverride String to fully override agent.fullname
 fullnameOverride: ""
 
+## @param serviceAccount.create Specifies whether a ServiceAccount should be created
+## @param serviceAccount.annotations Annotations to add to the ServiceAccount
+## @param serviceAccount.name The name of the ServiceAccount to use.
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -23,11 +36,14 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+## @param podAnnotations Annotations to add to the agent pods
 podAnnotations: {}
 
+## @param podSecurityContext Agent pods' Security Context
 podSecurityContext: {}
   # fsGroup: 2000
 
+## @param securityContext Agent containers' Security Context
 securityContext: {}
   # capabilities:
   #   drop:
@@ -36,51 +52,73 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+## @param service.type Kubernetes Service type
+## @param service.port Agent service port
 service:
   type: ClusterIP
   port: 14444
 
+## @param ingress.enabled Enables Ingress
+## @param ingress.annotations Ingress annotations
+## @param ingress.hosts Ingress accepted hostnames
+## @param ingress.tls Ingress TLS configuration
+## @param ingress.className Ingress class name
+## @param ingress.hosts Ingress accepted hostname
 ingress:
   enabled: false
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  hosts: {}
+    # - host: chart-example.local
+    #   paths:
+    #     - path: /
+    #       pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+## @param resources.limits CPU/Memory resource limits
+## @param resources.requests CPU/Memory resource requests
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
+  limits: {}
   #   cpu: 100m
   #   memory: 128Mi
-  # requests:
+  requests: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+## @param autoscaling.enabled Enable autoscaling for the agent deployment
+## @param autoscaling.minReplicas Minimum number of agent pods to run
+## @param autoscaling.maxReplicas Maximum number of agent pods to run
+## @param autoscaling.targetCPUUtilizationPercentage Target CPU utilization percentage
+## @param autoscaling.targetMemoryUtilizationPercentage Target Memory utilization percentage
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
 
+## @param nodeSelector Node labels for agent pod assignment
 nodeSelector: {}
 
+## @param tolerations Tolerations for agent pod assignment
 tolerations: []
 
+## @param affinity Affinity for agent pod assignment
 affinity: {}
 
+## @section Agent parameters
+## @param config Agent configuration, for more informatin see specific documentation for service discoveries
+## @skip config.server.forward-headers-strategy
+## @skip config.ostara.agent.service-discovery.kubernetes.enabled
 config:
   server:
     forward-headers-strategy: framework
