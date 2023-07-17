@@ -1,6 +1,6 @@
 # Ostara Agent
 
-An Ostara agent is a worker installed in your environment. It plays a pivotal role in connecting Ostara to the services within your environment. By installing an agent, you enable Ostara to discover and monitor your applications automatically.
+An [Ostara](https://github.com/krud-dev/ostara) agent is a worker installed in your environment. It plays a pivotal role in connecting Ostara to the services within your environment. By installing an agent, you enable Ostara to discover and monitor your applications automatically.
 
 For more information, visit the [documentation](https://docs.ostara.dev/documentation/agents).
 
