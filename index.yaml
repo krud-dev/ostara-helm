@@ -44,6 +44,16 @@ entries:
   demo:
   - apiVersion: v2
     appVersion: 0.11.0-SNAPSHOT
+    created: "2023-07-17T07:16:08.739721486Z"
+    description: The Ostara demo app
+    digest: 1bd2a1ce8bfe348b65335877d14aa36f04baa82a27eaa286114adf7cc9fb29e8
+    name: demo
+    type: application
+    urls:
+    - https://github.com/krud-dev/ostara-helm/releases/download/demo-0.2.0/demo-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 0.11.0-SNAPSHOT
     created: "2023-07-03T15:35:44.056199968Z"
     description: The Ostara demo app
     digest: 0a24330dac9ab052aa63c76f0a28fe438b9bfd6c3c6cb53fcf0ab9b3f16c7b9e
@@ -52,4 +62,4 @@ entries:
     urls:
     - https://github.com/krud-dev/ostara-helm/releases/download/demo-0.1.0/demo-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-16T11:44:49.736607295Z"
+generated: "2023-07-17T07:16:08.739734286Z"
