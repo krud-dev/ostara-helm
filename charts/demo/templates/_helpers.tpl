@@ -48,6 +48,7 @@ Selector labels
 {{- define "demo.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "demo.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+dev.ostara.io/type: "spring-boot"
 {{- end }}
 
 {{/*
