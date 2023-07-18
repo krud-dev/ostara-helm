@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  agent:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-07-18T07:22:06.156141565Z"
+    description: The Ostara Agent
+    digest: ca08e1cf2d15186c9dafb4c2523ac01f4fdf02ce6af28e39579ed9224a766923
+    name: agent
+    type: application
+    urls:
+    - https://github.com/krud-dev/ostara-helm/releases/download/agent-0.0.1/agent-0.0.1.tgz
+    version: 0.0.1
   demo:
   - apiVersion: v2
     appVersion: 0.11.0-SNAPSHOT
@@ -21,4 +32,4 @@ entries:
     urls:
     - https://github.com/krud-dev/ostara-helm/releases/download/demo-0.1.0/demo-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-17T07:16:08.739734286Z"
+generated: "2023-07-18T07:22:06.156151165Z"
